@@ -37,13 +37,14 @@ func wait(connection net.Conn) {
 	var buffer []byte
 
 	for {
-		if n, err := connection.Read(buffer); err == nil {
-			fmt.Println(n, "bytes read")
-			fmt.Println(buffer)
+		n, err := connection.Read(buffer)
+		fmt.Println(n, "bytes read")
+		if err == nil {
+			fmt.Println("Received: ", buffer)
 		} else {
-			/*fmt.Println(n, "bytes read")
 			fmt.Println("Error: ", err)
-			break*/
+			connection.Close()
+			break
 		}
 	}
 
