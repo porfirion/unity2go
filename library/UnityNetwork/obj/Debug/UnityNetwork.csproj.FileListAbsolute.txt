@@ -1,0 +1,5 @@
+D:\projects\unity\UnityNetwork\obj\Debug\UnityNetwork.csprojResolveAssemblyReference.cache
+D:\projects\unity\UnityNetwork\bin\Debug\UnityNetwork.dll
+D:\projects\unity\UnityNetwork\bin\Debug\UnityNetwork.pdb
+D:\projects\unity\UnityNetwork\obj\Debug\UnityNetwork.dll
+D:\projects\unity\UnityNetwork\obj\Debug\UnityNetwork.pdb
