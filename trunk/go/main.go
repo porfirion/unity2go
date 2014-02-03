@@ -17,11 +17,11 @@ func main() {
 	listener, err := net.ListenTCP(tcpProtocol, tcpAddr)
 
 	if err != nil {
-		fmt.Println("Some error: ", err)
+		fmt.Println("Error opening listener: ", err)
 		return
 	}
 
-	fmt.Println("Listening..")
+	fmt.Println("Listening..", tcpAddr)
 	for {
 		connection, err := listener.AcceptTCP()
 		if err != nil {
@@ -29,18 +29,43 @@ func main() {
 		}
 
 		fmt.Println("Connected! (", connection.RemoteAddr(), ")")
+
+		/*var buffer []byte
+		shouldClose := false
+		for !shouldClose {
+			buffer = make([]byte, 1000)
+			n, err := connection.Read(buffer)
+
+			if err != nil {
+				fmt.Println("Received: ", n)
+				fmt.Println("Error: ", err)
+				shouldClose = true
+			} else {
+				fmt.Println("Received: ", n)
+			}
+		}
+		connection.Close()
+		fmt.Println("Connection closed")*/
 		go wait(connection)
+	}
+
+	for {
 	}
 }
 
 func wait(connection net.Conn) {
+	defer connection.Close()
+
 	var buffer []byte
 
 	for {
+		buffer = make([]byte, 1000)
+
 		n, err := connection.Read(buffer)
+
 		fmt.Println(n, "bytes read")
 		if err == nil {
-			fmt.Println("Received: ", buffer)
+			fmt.Println("Received: ", string(buffer))
 		} else {
 			fmt.Println("Error: ", err)
 			connection.Close()
