@@ -1,0 +1,11 @@
+D:\work\u2g\trunk\library\NetTest\bin\Debug\NetTest.exe.config
+D:\work\u2g\trunk\library\NetTest\bin\Debug\NetTest.exe
+D:\work\u2g\trunk\library\NetTest\bin\Debug\NetTest.pdb
+D:\work\u2g\trunk\library\NetTest\bin\Debug\UnityNetwork.dll
+D:\work\u2g\trunk\library\NetTest\bin\Debug\UnityNetwork.pdb
+D:\work\u2g\trunk\library\NetTest\obj\Debug\NetTest.csprojResolveAssemblyReference.cache
+D:\work\u2g\trunk\library\NetTest\obj\Debug\NetTest.Form1.resources
+D:\work\u2g\trunk\library\NetTest\obj\Debug\NetTest.Properties.Resources.resources
+D:\work\u2g\trunk\library\NetTest\obj\Debug\NetTest.csproj.GenerateResource.Cache
+D:\work\u2g\trunk\library\NetTest\obj\Debug\NetTest.exe
+D:\work\u2g\trunk\library\NetTest\obj\Debug\NetTest.pdb
