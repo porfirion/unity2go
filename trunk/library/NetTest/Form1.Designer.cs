@@ -28,38 +28,77 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.log = new System.Windows.Forms.TextBox();
+            this.components = new System.ComponentModel.Container();
+            this.connectButton = new System.Windows.Forms.Button();
+            this.logBox = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.readBox = new System.Windows.Forms.CheckBox();
+            this.writeBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
-            // button1
+            // connectButton
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(260, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Connect";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.connectButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.connectButton.Location = new System.Drawing.Point(12, 12);
+            this.connectButton.Name = "connectButton";
+            this.connectButton.Size = new System.Drawing.Size(216, 40);
+            this.connectButton.TabIndex = 0;
+            this.connectButton.Text = "Connect";
+            this.connectButton.UseVisualStyleBackColor = true;
+            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
             // 
-            // log
+            // logBox
             // 
-            this.log.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.logBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.log.Location = new System.Drawing.Point(12, 41);
-            this.log.Multiline = true;
-            this.log.Name = "log";
-            this.log.Size = new System.Drawing.Size(260, 385);
-            this.log.TabIndex = 1;
+            this.logBox.Location = new System.Drawing.Point(12, 58);
+            this.logBox.Multiline = true;
+            this.logBox.Name = "logBox";
+            this.logBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.logBox.Size = new System.Drawing.Size(302, 258);
+            this.logBox.TabIndex = 1;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 10;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // readBox
+            // 
+            this.readBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.readBox.AutoSize = true;
+            this.readBox.Enabled = false;
+            this.readBox.Location = new System.Drawing.Point(234, 12);
+            this.readBox.Name = "readBox";
+            this.readBox.Size = new System.Drawing.Size(47, 17);
+            this.readBox.TabIndex = 2;
+            this.readBox.Text = "read";
+            this.readBox.UseVisualStyleBackColor = true;
+            // 
+            // writeBox
+            // 
+            this.writeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.writeBox.AutoSize = true;
+            this.writeBox.Enabled = false;
+            this.writeBox.Location = new System.Drawing.Point(234, 35);
+            this.writeBox.Name = "writeBox";
+            this.writeBox.Size = new System.Drawing.Size(48, 17);
+            this.writeBox.TabIndex = 2;
+            this.writeBox.Text = "write";
+            this.writeBox.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 438);
-            this.Controls.Add(this.log);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(326, 328);
+            this.Controls.Add(this.writeBox);
+            this.Controls.Add(this.readBox);
+            this.Controls.Add(this.logBox);
+            this.Controls.Add(this.connectButton);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -69,8 +108,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox log;
+        private System.Windows.Forms.Button connectButton;
+        private System.Windows.Forms.TextBox logBox;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.CheckBox readBox;
+        private System.Windows.Forms.CheckBox writeBox;
 
     }
 }

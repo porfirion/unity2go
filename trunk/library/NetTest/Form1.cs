@@ -15,41 +15,68 @@ namespace NetTest {
         const int port = 25001;
         const string ip = "localhost";
 
-        Socket socket = null;
+        private Socket socket = null;
+
         public Form1() {
             InitializeComponent();
         }
 
-        private void checkStatus() {
-            if (socket != null) {
-                bool enableRead = socket.Poll(10, SelectMode.SelectRead);
-                bool enableWrite = socket.Poll(10, SelectMode.SelectWrite);
-                log.AppendText("Enable read: " + enableRead.ToString() + "\n");
-                log.AppendText("Enable write: " + enableWrite.ToString() + "\n");
-            }
+        private void log(string message) {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(DateTime.Now.ToLongTimeString());
+            sb.Append(" ");
+            sb.Append(DateTime.Now.Millisecond);
+            sb.Append(":\t");
+            sb.Append(message);
+            sb.Append("\r\n");
+            logBox.AppendText(sb.ToString());
+            //logBox.AppendText(DateTime.Now.ToLongTimeString() + " " + DateTime.Now.Millisecond + ":\t" + message + "\r\n");
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            
-            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            socket.Connect(ip, port);
-            log.AppendText("Connected!\n");
-
-            //socket.Blocking = false;
-            log.AppendText("Blocking: " + socket.Blocking.ToString() + "\n");
-
-            bool enableRead = socket.Poll(10, SelectMode.SelectRead);
-            bool enableWrite = socket.Poll(10, SelectMode.SelectWrite);
-
-            if (enableWrite) {
-                byte[] msg = Encoding.UTF8.GetBytes("Hello world!");
-                int bytesWritten = socket.Send(msg);
-                log.AppendText("Written: " + bytesWritten.ToString() + "\n");
+        private void connectButton_Click(object sender, EventArgs e) {
+            if (socket == null) {
+                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            }
+            if (!socket.Connected) {
+                socket.Connect(ip, port);
             }
 
-            checkStatus();
+            try {
+                int n = socket.Send(Encoding.UTF8.GetBytes("Hello!"));
+                log(n.ToString() + " bytes written");
+            }
+            catch (Exception ex) {
+                log(ex.Message);
+            }
 
-            socket.Close();
+            //socket.Close();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e) {
+            if (socket == null || !socket.Connected) {
+                connectButton.BackColor = Color.Red;
+            }
+            else {
+                connectButton.BackColor = Color.Green;
+
+                bool canRead = socket.Poll(100, SelectMode.SelectRead);
+                bool canWrite = socket.Poll(100, SelectMode.SelectWrite);
+
+                if (canRead) { 
+                    readBox.Checked = true;
+
+                    byte[] buffer = new byte[1000];
+                    int n = socket.Receive(buffer);
+                    string bufferS = Encoding.UTF8.GetString(buffer, 0, n);
+                    bufferS.Trim();
+                    log(n + " bytes read");
+                    log(bufferS);
+                } 
+                else { 
+                    readBox.Checked = false; 
+                }
+                if (canWrite) { writeBox.Checked = true; } else { writeBox.Checked = false; }
+            }
         }
     }
 }
