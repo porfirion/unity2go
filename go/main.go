@@ -65,7 +65,17 @@ func wait(connection net.Conn) {
 
 		fmt.Println(n, "bytes read")
 		if err == nil {
-			fmt.Println("Received: ", string(buffer))
+			fmt.Println("Received: ", string(buffer[:n]))
+		} else {
+			fmt.Println("Error: ", err)
+			connection.Close()
+			break
+		}
+
+		n, err = connection.Write(buffer)
+		if err == nil {
+			fmt.Println(n, "bytes written")
+			//fmt.Println("Written: ", string(buffer[:n]))
 		} else {
 			fmt.Println("Error: ", err)
 			connection.Close()
