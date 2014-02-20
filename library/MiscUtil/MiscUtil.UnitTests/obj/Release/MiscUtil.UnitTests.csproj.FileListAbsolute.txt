@@ -1,0 +1,12 @@
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil.UnitTests\bin\Release\IO\samplefile.txt
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil.UnitTests\bin\Release\MiscUtil.UnitTests.dll
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil.UnitTests\bin\Release\MiscUtil.UnitTests.pdb
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil.UnitTests\bin\Release\MiscUtil.dll
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil.UnitTests\bin\Release\nunit.framework.dll
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil.UnitTests\bin\Release\Rhino.Mocks.dll
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil.UnitTests\bin\Release\MiscUtil.pdb
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil.UnitTests\bin\Release\MiscUtil.xml
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil.UnitTests\bin\Release\Rhino.Mocks.xml
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil.UnitTests\obj\Release\MiscUtil.UnitTests.csprojResolveAssemblyReference.cache
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil.UnitTests\obj\Release\MiscUtil.UnitTests.dll
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil.UnitTests\obj\Release\MiscUtil.UnitTests.pdb

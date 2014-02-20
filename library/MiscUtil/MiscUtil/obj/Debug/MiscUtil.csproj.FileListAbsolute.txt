@@ -1,0 +1,5 @@
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil\bin\Debug\MiscUtil.dll
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil\bin\Debug\MiscUtil.pdb
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil\obj\Debug\MiscUtil.csprojResolveAssemblyReference.cache
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil\obj\Debug\MiscUtil.dll
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil\obj\Debug\MiscUtil.pdb

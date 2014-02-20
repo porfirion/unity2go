@@ -1,0 +1,5 @@
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil\bin\Release\MiscUtil.xml
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil\bin\Release\MiscUtil.dll
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil\bin\Release\MiscUtil.pdb
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil\obj\Release\MiscUtil.dll
+D:\work\u2g\trunk\library\MiscUtil\MiscUtil\obj\Release\MiscUtil.pdb
