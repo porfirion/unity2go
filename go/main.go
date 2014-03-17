@@ -24,6 +24,8 @@ func main() {
 	}
 
 	fmt.Println("Listening..", tcpAddr)
+
+	// main loop
 	for {
 		connection, err := listener.AcceptTCP()
 		if err != nil {
@@ -31,27 +33,35 @@ func main() {
 		}
 
 		fmt.Println("Connected! (", connection.RemoteAddr(), ")")
-
-		/*var buffer []byte
-		shouldClose := false
-		for !shouldClose {
-			buffer = make([]byte, 1000)
-			n, err := connection.Read(buffer)
-
-			if err != nil {
-				fmt.Println("Received: ", n)
-				fmt.Println("Error: ", err)
-				shouldClose = true
-			} else {
-				fmt.Println("Received: ", n)
-			}
-		}
-		connection.Close()
-		fmt.Println("Connection closed")*/
 		go wait(connection)
 	}
+}
 
-	for {
+func processMessage(buffer []byte) {
+	fmt.Println(buffer)
+	var reader *bytes.Reader = bytes.NewReader(buffer)
+	var typeCode int32
+	err := binary.Read(reader, binary.BigEndian, &typeCode)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("Message type: ", typeCode)
+	}
+
+	switch typeCode {
+	case 1:
+		fmt.Print("TextMessage (")
+		var num uint16
+		err := binary.Read(reader, binary.BigEndian, &num)
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			fmt.Println(num, " bytes)")
+		}
+		var textBytes []byte = make([]byte, num)
+		binary.Read(reader, binary.BigEndian, textBytes)
+		fmt.Println(string(textBytes))
+	default:
 	}
 }
 
@@ -62,7 +72,7 @@ func wait(connection net.Conn) {
 
 		//reader := bufio.NewReader(connection)
 
-		var num uint16
+		var num uint32
 		//err := binary.Read(reader, binary.BigEndian, &num)
 		err := binary.Read(connection, binary.BigEndian, &num)
 		if err != nil {
@@ -85,37 +95,7 @@ func wait(connection net.Conn) {
 			buffer.Write(chunk[:n])
 		}
 		fmt.Println("Message length: ", buffer.Len())
-		//fmt.Println(buffer.Bytes())
-		fmt.Println(buffer.String())
-		/*var message string
-		binary.Read(bytes.NewReader(buffer.Bytes()), binary.BigEndian, &message)
-		fmt.Println(message)*/
-
-		//мы получили длину соощения. вычитываем все оставшиеся байты в буфер
-
-		/*
-			var buffer []byte = make([]byte, 1000)
-			n, err := connection.Read(buffer)
-
-			fmt.Println(n, "bytes read")
-			if err == nil {
-				fmt.Println("Received: ", string(buffer[:n]))
-			} else {
-				fmt.Println("Error: ", err)
-				connection.Close()
-				break
-			}
-
-			n, err = connection.Write(buffer)
-			if err == nil {
-				fmt.Println(n, "bytes written")
-				//fmt.Println("Written: ", string(buffer[:n]))
-			} else {
-				fmt.Println("Error: ", err)
-				connection.Close()
-				break
-			}
-		*/
+		processMessage(buffer.Bytes())
 	}
 
 	fmt.Println("Waiting finished")
