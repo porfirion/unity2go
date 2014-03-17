@@ -20,13 +20,13 @@ namespace NetTest {
 
         private Socket socket = null;
 
-        private List<string> outputOrder = new List<string>();
+        private List<Message> outputOrder = new List<Message>();
 
         public Form1() {
             InitializeComponent();
         }
 
-        private void log(string message) {
+        public void log(string message) {
             StringBuilder sb = new StringBuilder();
             sb.Append(DateTime.Now.ToLongTimeString());
             sb.Append(" ");
@@ -88,42 +88,14 @@ namespace NetTest {
                 if (canWrite) { 
                     writeBox.Checked = true;
                     if (outputOrder.Count > 0) {
-                        foreach(string message in outputOrder) {
-                            Stream stream = new NetworkStream(socket);
-                            MemoryStream tmpStream = new MemoryStream();
-                            EndianBinaryWriter writer = new EndianBinaryWriter(EndianBitConverter.Big, tmpStream, Encoding.UTF8);
-                            writer.Write((ushort)Encoding.UTF8.GetByteCount(message));
-                            writer.Write(message.ToCharArray());
-                            writer.Flush();
-                            log(tmpStream.ToArray().ToString());
-                            tmpStream.WriteTo(stream);
-                            //byte[] bytes = stream.ToArray();
-                            
-                            /*byte[] buffer = Encoding.UTF8.GetBytes(message);
-
-                            if (buffer.Length > 0) {
-                                //byte[] lenBuffer = BitConverter.GetBytes((uint)buffer.Length);
-                                byte[] lenBuffer = BitConverter.GetBytes((short)buffer.Length);
-                                if (System.BitConverter.IsLittleEndian) {
-                                    Array.Reverse(buffer);
-                                    Array.Reverse(lenBuffer);
-                                }
-                                try {
-                                    int sent = 0;
-
-                                    sent = socket.Send(lenBuffer);
-                                    sent += socket.Send(buffer, 0, 1, SocketFlags.None);
-                                    sent += socket.Send(buffer, 1, buffer.Length - 1,SocketFlags.None);
-
-                                    log("Sent " + sent.ToString() + " bytes");
-                                }
-                                catch (System.FormatException ex) {
-                                    log("Exception: " + ex.Message);
-                                }
+                        Stream stream = new NetworkStream(socket);
+                        foreach(Message message in outputOrder) {
+                            if (message is TextMessage) {
+                                byte[] bytes = message.ToBytes();
+                                log(formatBytes(bytes));
+                                //log("Converter    : " + formatBytes(bytes));
+                                stream.Write(bytes, 0, bytes.Length);
                             }
-                            else {
-                                log("Empty message");
-                            }*/
                         }
                         outputOrder.Clear();
                     }
@@ -135,10 +107,18 @@ namespace NetTest {
         }
 
         private void sendMessage() {
-            outputOrder.Add(sendTextBox.Text);
+            outputOrder.Add(new TextMessage(sendTextBox.Text));
         }
         private void sendButton_Click(object sender, EventArgs e) {
             sendMessage();
+        }
+
+        public static string formatBytes(Byte[] bytes) {
+            string value = "";
+            foreach (Byte b in bytes)
+                value += String.Format("{0:X2} ", b);
+
+            return value;
         }
     }
 }
