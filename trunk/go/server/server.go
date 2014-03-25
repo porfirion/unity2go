@@ -6,6 +6,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"net"
+	"u2g/messages"
 )
 
 var (
@@ -15,7 +16,12 @@ var (
 	connection  net.Conn
 )
 
+type Message struct {
+}
+
 func main() {
+	test()
+	return
 	listener, err := net.ListenTCP(tcpProtocol, tcpAddr)
 
 	if err != nil {
@@ -99,4 +105,10 @@ func wait(connection net.Conn) {
 	}
 
 	fmt.Println("Waiting finished")
+}
+
+func test() {
+	msg := new(messages.TextMessage)
+	msg.Text = "привет"
+	msg.GetBytes()
 }
