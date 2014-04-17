@@ -16,9 +16,6 @@ var (
 	connection  net.Conn
 )
 
-type Message struct {
-}
-
 func main() {
 	test()
 	return
@@ -68,6 +65,7 @@ func processMessage(buffer []byte) {
 		binary.Read(reader, binary.BigEndian, textBytes)
 		fmt.Println(string(textBytes))
 	default:
+
 	}
 }
 
@@ -108,7 +106,16 @@ func wait(connection net.Conn) {
 }
 
 func test() {
-	msg := new(messages.TextMessage)
-	msg.Text = "привет"
-	msg.GetBytes()
+	var msg *messages.TextMessage
+	if 2 == 2 {
+		msg = &messages.TextMessage{messages.BaseMessage{messages.MessageTypeText}, "Привет!"}
+	} else {
+		msg = messages.NewMessage(messages.MessageTypeText).(*messages.TextMessage)
+		msg.Text = "привет"
+	}
+
+	bytes := msg.GetBytes()
+	fmt.Println(bytes)
+
+	messages.FromBytes(bytes)
 }
