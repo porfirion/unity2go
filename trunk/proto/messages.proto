@@ -1,0 +1,10 @@
+package messages;
+	
+message Request {
+	required int32 typeId = 1;
+}
+
+message Response {
+	required int32 typeId = 1;
+	optional string message = 3;
+}
