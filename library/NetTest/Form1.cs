@@ -39,9 +39,10 @@ namespace NetTest {
         }
 
         private void connectButton_Click(object sender, EventArgs e) {
-            if (socket == null) {
+            if (socket == null || !socket.Connected) {
                 socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             }
+            
             if (!socket.Connected) {
                 socket.Connect(ip, port);
             }
